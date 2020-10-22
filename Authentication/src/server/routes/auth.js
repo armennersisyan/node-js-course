@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -17,7 +18,7 @@ async function signIn(req, res, next) {
          */
         if (!username || !password) {
             console.log('\x1b[33m%s\x1b[0m', 'Please fill the required fields!')
-            return res.status('400').send({ error: 'Please fill the required fields!' })
+            return res.status('200').send({ error: 'Please fill the required fields!' })
         }
 
         /**
@@ -26,11 +27,19 @@ async function signIn(req, res, next) {
         const db = await fs.readFile('./db.json');
         const dbParsed = db.toString() ? JSON.parse(db) : [];
 
-        const user = dbParsed.find(u => u.username === username && u.password === password);
+        let isPasswordMatch;
+        const user = dbParsed.find(u => u.username === username);
 
-        if (!user) {
+        /**
+         * Checks if password is correct
+         */
+        if (user) {
+            isPasswordMatch = await bcrypt.compare(password, user.password);
+        }
+
+        if (!isPasswordMatch || !user) {
             console.log('\x1b[31m%s\x1b[0m', 'Incorrect username or password!')
-            return res.status('400').send({ error: 'Incorrect username or password!' })
+            return res.status('403').send({ error: 'Incorrect username or password!' })
         }
 
         delete user.password;
@@ -55,16 +64,21 @@ async function signUp(req, res, next) {
          */
         if (!username) {
             console.log('\x1b[33m%s\x1b[0m', 'Username is required')
-            return res.status('400').send('Username is required!')
+            return res.status('403').send('Username is required!')
         }
         if (!password) {
             console.log('\x1b[33m%s\x1b[0m', 'Password is required')
-            return res.status('400').send('Password is required!')
+            return res.status('403').send('Password is required!')
         }
+
+        /**
+         * Crypt Password
+         */
+        const hashPassword = await bcrypt.hash(password, 10);
 
         const user = {
             username,
-            password,
+            password: hashPassword,
             lastName: req.body.lastName || '',
             firstName: req.body.firstName || '',
         };
@@ -77,7 +91,7 @@ async function signUp(req, res, next) {
 
         if (dbParsed.findIndex(u => u.username === username) > -1) {
             console.log('\x1b[31m%s\x1b[0m', 'Oops the username already exists!')
-            return res.status('400').send('Oops the username already exists!')
+            return res.status('403').send('Oops the username already exists!')
         }
 
         dbParsed.push(user);
