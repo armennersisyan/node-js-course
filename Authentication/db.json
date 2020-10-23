@@ -1,1 +1,26 @@
-[{"username":"test_user","password":"$2b$10$.a9UBNCUD7EAB7E9O07.6O.sErX.5/jEGNUJwjtta/An/u4ZGtj8K","lastName":"User","firstName":"Test"}]
+[
+  {
+    "role": "user",
+    "username": "user",
+    "id": "40126acf-749b-4737-a003-ccec4b8beb26",
+    "password": "$2b$10$JXNFOu10n37DebT33Qqf0ORzG6./HsZ9b2EGfo/AlHl.yhYryQqXm",
+    "lastName": "White",
+    "firstName": "John"
+  },
+  {
+    "role": "admin",
+    "username": "armen_nersisyan",
+    "id": "39d99f64-bad7-42f3-893d-cbccf94f9166",
+    "password": "$2b$10$4bFf30EtI5N2a/Zeu/FzEO/vpNwKnbOnLjjtakV.eREjNUDXkX6ae",
+    "lastName": "Nersisyan",
+    "firstName": "Armen"
+  },
+  {
+    "role": "user",
+    "username": "armen_nersisyan_2",
+    "id": "d68369e2-670c-4e0e-afae-6c2467f4049e",
+    "password": "$2b$10$8IlOP1wFo/PCQhNjJtrGY.GNW4oiYPQOKpHwPqVmnB4Tjg4XOhiu6",
+    "lastName": "Nersisyan_2",
+    "firstName": "Armen_2"
+  }
+]
