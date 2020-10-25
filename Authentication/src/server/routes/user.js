@@ -61,7 +61,59 @@ async function updateUser(req, res, next) {
     }
 }
 
+async function deleteUser(req, res, next) {
+    try {
+        const { userId } = req.params;
+        const token = req.headers.authorization.split(' ')[1];
+        const { id, role } = jwt.verify(token, process.env.TOKEN_KEY || 'unKeyed');
+
+        /**
+         * Check if the inputed ID is current user's ID
+         * or if the user is admin
+         */
+        if (id !== userId && role !== 'admin') {
+            console.log('\x1b[31m%s\x1b[0m', 'Permission denied');
+            return res.status('403').send('Permission denied');
+        }
+
+        /**
+         * Read and parse db
+         */
+        const db = await fs.readFile('./db.json');
+        const dbParsed = db.toString() ? JSON.parse(db) : [];
+
+        /**
+         * Delete user
+         */
+        const deletedList = dbParsed.filter(u => u.id !== userId);
+
+        /**
+         * Checks if user is deleted
+         */
+        if (dbParsed.length === deletedList.length) {
+            console.log('\x1b[31m%s\x1b[0m', 'User not found!');
+            return res.status('403').send('User not found!');
+        }
+
+        /**
+         * Update db with deleted user
+         */
+        const dbStringified = JSON.stringify(deletedList, null, 2);
+        await fs.writeFile('./db.json', dbStringified);
+
+        console.log('\x1b[32m%s\x1b[0m', 'Successfully Deleted!');
+        return res.status('403').send('Successfully Deleted!');
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    }
+}
+
 userRouter
     .put('/user/:userId?', updateUser)
+    .delete('/user/:userId?', deleteUser)
 
 module.exports = userRouter;

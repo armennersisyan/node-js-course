@@ -1,13 +1,5 @@
 [
   {
-    "role": "user",
-    "username": "user",
-    "id": "40126acf-749b-4737-a003-ccec4b8beb26",
-    "password": "$2b$10$JXNFOu10n37DebT33Qqf0ORzG6./HsZ9b2EGfo/AlHl.yhYryQqXm",
-    "lastName": "White",
-    "firstName": "John"
-  },
-  {
     "role": "admin",
     "username": "armen_nersisyan",
     "id": "39d99f64-bad7-42f3-893d-cbccf94f9166",
