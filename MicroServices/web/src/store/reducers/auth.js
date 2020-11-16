@@ -9,7 +9,7 @@ function auth(state = initialState, action) {
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
       };
     case 'LOGOUT':
       return {

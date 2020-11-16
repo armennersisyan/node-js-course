@@ -1,5 +1,6 @@
 const server = require('http').createServer();
 const io = require('socket.io')(server);
+const Message = require('./src/utils/messages');
 
 const PORT = 3002;
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage';
@@ -11,6 +12,11 @@ io.on('connection', (socket) => {
 
   // Listen for new messages
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    const message = {
+      text: data.body,
+      roomId
+    }
+    Message.send(message);
     io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
   });
 

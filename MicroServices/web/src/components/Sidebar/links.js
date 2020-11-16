@@ -7,8 +7,18 @@ const links = [
     icon: layer
   },
   {
-    name: 'Chat',
-    to: '/chat/PicsArt',
+    name: 'Room First',
+    to: '/chat/first',
+    icon: projects
+  },
+  {
+    name: 'Room Second',
+    to: '/chat/second',
+    icon: projects
+  },
+  {
+    name: 'Room Third',
+    to: '/chat/third',
     icon: projects
   },
 ];

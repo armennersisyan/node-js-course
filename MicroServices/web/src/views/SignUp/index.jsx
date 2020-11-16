@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 import { Container } from 'react-bootstrap';
-import { registerUserRequest, getCompaniesRequest } from '../../store/actions'
+import { registerUserRequest } from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Error from '../../components/UI/Error';

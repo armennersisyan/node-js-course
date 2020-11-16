@@ -34,7 +34,7 @@ export function registerUserRequest(payload) {
       });
       NotificationManager.success('You have registered successfully!', 'Congratulations!');
     } catch (error) {
-      NotificationManager.error('Please check your details', 'Oops!');
+      NotificationManager.error(error.message || 'Something went wrong!', 'Oops!');
     } finally {
       dispatch(signUserPending(false));
     }
