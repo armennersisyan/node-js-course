@@ -8,17 +8,17 @@ const links = [
   },
   {
     name: 'Room First',
-    to: '/chat/first',
+    to: '/chat/first1',
     icon: projects
   },
   {
     name: 'Room Second',
-    to: '/chat/second',
+    to: '/chat/second2',
     icon: projects
   },
   {
     name: 'Room Third',
-    to: '/chat/third',
+    to: '/chat/third3',
     icon: projects
   },
 ];
