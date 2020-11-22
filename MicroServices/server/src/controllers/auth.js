@@ -1,4 +1,4 @@
-const AuthModel = require('../models/auth');
+const { AuthSchema } = require('../../../mongo/schemas/auth');
 const mongoose = require('mongoose');
 
 class Auth {
@@ -6,12 +6,12 @@ class Auth {
     const { username, firstName, lastName, password } = req.body;
     try {
       // Find an existing user
-      let user = await AuthModel.findOne({ username });
+      let user = await AuthSchema.findOne({ username });
       if (user) return res.status(400).json({
         msg: 'User already registered!'
       });
 
-      user = new AuthModel({
+      user = new AuthSchema({
         _id: mongoose.Types.ObjectId(),
         firstName,
         lastName,
@@ -33,7 +33,7 @@ class Auth {
   signIn = async (req, res) => {
     const { username, password } = req.body;
     try {
-      const user = await AuthModel.findOne({ username });
+      const user = await AuthSchema.findOne({ username });
       if (!user) {
         res.status(400).json({
           msg: 'User not found!',

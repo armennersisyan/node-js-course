@@ -1,18 +1,15 @@
 require('dotenv').config();
 
 const express = require('express');
-const mongoose = require('mongoose');
 const routes = require('./src/routes');
+const Mongo = require('../mongo/index');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3004;
 
-mongoose.connect(process.env.MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+Mongo.connect(process.env.MONGO);
 
 app.use(cors());
 app.use(bodyParser.json());
