@@ -1,4 +1,4 @@
-const { AuthSchema } = require('../../../mongo/schemas/auth');
+const { AuthSchema } = require('../../../mongo/schemas');
 const mongoose = require('mongoose');
 
 class Auth {
